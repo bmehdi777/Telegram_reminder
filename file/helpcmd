@@ -1,0 +1,8 @@
+*/command <obligé> [facultatif]* - _Description de la commandes_
+
+*/start* - _Allume le bot._
+*/stop* - _Arrete le bot._
+
+*/help* - _Affiche la liste des commandes._
+*/chaine* - _Affiche la liste des chaînes disponibles._
+*/prime [chaine]* - _Affiche le prime de la soirée de la chaîne en question ou affiche le prime de ce soir._
