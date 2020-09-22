@@ -29,18 +29,6 @@ def get_planning():
             planning.append((j["title"], start[8:10]+"h"+start[10:12], j["@channel"]))
 
     return (chaine, planning)
-
-def send_rappel_perday(bot, update):
-    planning = get_planning()
-    chaine = dict(planning[0])
-    routine = database.get_routine(update.message.chat_id)
-    resp = datetime.datetime.today().strftime('%d/%m/%Y') +"\nCe soir il y a : \n"
-    for i in routine:
-        for j in planning[1]:
-            if(i[1] in j[0]):
-                resp += " - " +j[0] + " sur la " + chaine[j[2]] + " à " + j[1] + "\n"
-    bot.send_message(chat_id=update.message.chat_id, text=resp)
-
 #Command
 
 def send_typing_action(func):
@@ -59,7 +47,7 @@ def send_typing_action(func):
 
 ######## ON/OFF COMMAND ###########
 
-def cstart(bot, update, job_queue):
+def cstart(bot, update):
     if (database.get_chat(update.message.chat_id) == [] or database.get_chat_enable(update.message.chat_id) == 0):
         bot.send_message(chat_id=update.message.chat_id, text="Démarrage du bot...")
         database.insert_chat(update.message.chat_id, 1)
@@ -69,7 +57,7 @@ def cstart(bot, update, job_queue):
         bot.send_message(chat_id=update.message.chat_id, text="Le bot est déjà allumé.")
         logging.info("/start a été entré alors que le bot est déjà allumé.")
 
-def cstop(bot, update, job_queue):
+def cstop(bot, update):
     if (database.get_chat_enable(update.message.chat_id) == 1):
         bot.send_message(chat_id=update.message.chat_id, text="Au revoir.")
         database.set_enable_chat(update.message.chat_id, 0)

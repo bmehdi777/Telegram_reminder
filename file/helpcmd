@@ -1,8 +1,11 @@
-*/command <obligé> [facultatif]* - _Description de la commandes_
+*/command <obligé> [facultatif]* - Description de la commandes
 
-*/start* - _Allume le bot._
-*/stop* - _Arrete le bot._
+*/start* - Allume le bot.
+*/stop* - Arrete le bot.
 
-*/help* - _Affiche la liste des commandes._
-*/chaine* - _Affiche la liste des chaînes disponibles._
-*/prime [chaine]* - _Affiche le prime de la soirée de la chaîne en question ou affiche le prime de ce soir._
+*/help* - Affiche la liste des commandes.
+*/chaine* - Affiche la liste des chaînes disponibles.
+*/prime [chaine]* - Affiche le prime de la soirée de la chaîne en question ou affiche le prime de ce soir.
+*/rappel <nom du programme>* - Créer un rappel pour le programme que vous avez saisi.
+*/showrappel* - Affiche la liste des rappels.
+*/removerappel <nom du programme>* - Supprime le rappel pour le programme que vous avez saisi.

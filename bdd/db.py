@@ -47,7 +47,14 @@ class Database:
 
     def get_routine(self, chat_id):
         cursor = self.conn.cursor()
-        cursor.execute(sql.GET_ROUTINES, (chat_id,))
+        cursor.execute(sql.GET_ROUTINE, (chat_id,))
+        data = cursor.fetchall()
+        self.conn.commit()
+        return data
+
+    def get_routines_enabled(self):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.GET_ROUTINES_ENABLED)
         data = cursor.fetchall()
         self.conn.commit()
         return data
@@ -63,10 +70,23 @@ class Database:
         data = cursor.fetchall()
         self.conn.commit()
         return data
+    def get_chats(self):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.GET_CHATS)
+        data = cursor.fetchall()
+        self.conn.commit()
+        return data
 
     def get_chat_enable(self, chat_id):
         chat = self.get_chat(chat_id)
         return chat[0][1]
+
+    def get_chats_with_routine(self):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.GET_CHATS_WITH_ROUTINE)
+        data = cursor.fetchall()
+        self.conn.commit()
+        return data
 
     def close_connection(self):
         self.conn.close()

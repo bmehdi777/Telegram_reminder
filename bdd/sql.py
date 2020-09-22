@@ -24,9 +24,15 @@ DELETE FROM Routine
 WHERE chat_id = ? AND routine_id = ?
 """
 
-GET_ROUTINES="""
+GET_ROUTINE="""
 SELECT * FROM Routine
 WHERE chat_id = ?
+"""
+
+GET_ROUTINES_ENABLED="""
+SELECT * FROM Routine
+INNER JOIN Chat ON Routine.chat_id = Chat.chat_id
+WHERE Chat.bool_enable = 1
 """
 
 INSERT_CHAT = """
@@ -44,4 +50,14 @@ GET_CHAT= """
 SELECT *
 FROM Chat
 WHERE chat_id = ?;
+"""
+
+GET_CHATS="""
+SELECT * FROM Chat
+"""
+
+GET_CHATS_WITH_ROUTINE="""
+SELECT * FROM Chat
+INNER JOIN Routine ON Chat.chat_id = Routine.chat_id
+WHERE Chat.bool_enable = 1 GROUP BY Chat.chat_id
 """
