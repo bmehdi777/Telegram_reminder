@@ -11,6 +11,8 @@ Install pip package :
 You can install them manually or use the :
 >pip install -r requirement
 
+SQLite3 has to be installed.
+
 ### Start the project
 
 First of all, you need to put your token in the file file/token (it is IMPORTANT).
