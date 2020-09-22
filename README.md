@@ -11,13 +11,10 @@ Install pip package :
 You can install them manually or use the :
 >pip install -r requirement
 
-### Installing
-You need to add a "bdd.db" in the bdd folder. This database use sqlite3.
-You can install it by doing this : 
+### Start the project
 
->sqlite3 bdd.db
->.database (to see if it has been created)
->.exit
+You have to execute main.py to start the bot. If you want to have the reminder part, you need to launch with cron the routine.py. It'll send message to every chat with a reminder set up.
+
 
 ## Built with
 
@@ -26,9 +23,20 @@ You can install it by doing this :
 
 ## Command of the bot
 
+- >/start
+    - Start the bot (important)
+- >/stop
+    - Stop the bot
+
 - >/help
     - Show the list of command
 - >/chaine
     - Show the list of channel available
 - >/prime \[channel\]
-    - Show the TV program of all the channel available or of the \[channel\] tonight 
+    - Show the TV program of all the channel available or of the \[channel\] tonight
+- >/rappel \<program\>
+    - Add a program to the reminder
+- >/showrappel
+    - Show all of the reminder that the user has set up.
+- >/removerappel \<number of the reminder\>
+    - Remove the reminder with this number
