@@ -13,7 +13,8 @@ You can install them manually or use the :
 
 ### Start the project
 
-First of all, you need to put your token in the file file/token (it is IMPORTANT)
+First of all, you need to put your token in the file file/token (it is IMPORTANT).
+
 You have to execute main.py to start the bot. If you want to have the reminder part, you need to launch with cron the routine.py. It'll send message to every chat with a reminder set up.
 
 
