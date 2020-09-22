@@ -16,12 +16,10 @@ class Database:
             self.conn()
             cursor = self.conn.cursor()
             logging.info("Création de la base de donnée.")
-            cursor.execute(sql.CREATE_TABLE_USER)
-            logging.info("Table User créer.")
-            cursor.execute(sql.CREATE_TABLE_USERCHAT)
-            logging.info("Table UserChat créer.")
             cursor.execute(sql.CREATE_TABLE_CHAT)
-            logging.info("Table Chat créer.")
+            logging.info("Table Chat créée.")
+            cursor.execute(sql.CREATE_TABLE_ROUTINE)
+            logging.info("Table Routine créée.")
             self.conn.commit()
         except sqlite3.OperationalError:
             logging.info("Erreur : la table existe déjà.")
@@ -37,6 +35,23 @@ class Database:
         cursor.execute(sql.INSERT_CHAT,(chat_id,enable))
         self.conn.commit()
 
+    def insert_routine(self, programme, chat_id):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.INSERT_ROUTINE, (programme, chat_id,))
+        self.conn.commit()
+
+    def remove_routine(self, chat_id, routine_id):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.REMOVE_ROUTINE, (chat_id, routine_id))
+        self.conn.commit()
+
+    def get_routine(self, chat_id):
+        cursor = self.conn.cursor()
+        cursor.execute(sql.GET_ROUTINES, (chat_id,))
+        data = cursor.fetchall()
+        self.conn.commit()
+        return data
+
     def set_enable_chat(self, chat_id, enable):
         cursor = self.conn.cursor()
         cursor.execute(sql.SET_ENABLE, (enable, chat_id))
@@ -46,7 +61,7 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute(sql.GET_CHAT, (chat_id, ))
         data = cursor.fetchall()
-        self.conn.commit
+        self.conn.commit()
         return data
 
     def get_chat_enable(self, chat_id):
