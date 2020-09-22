@@ -39,6 +39,6 @@ You have to execute main.py to start the bot. If you want to have the reminder p
 - >/rappel \<program\>
     - Add a program to the reminder
 - >/showrappel
-    - Show all of the reminder that the user has set up.
+    - Show all of the reminder that the user has set up
 - >/removerappel \<number of the reminder\>
     - Remove the reminder with this number
