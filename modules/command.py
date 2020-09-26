@@ -86,7 +86,7 @@ def cinfo(bot, update, args):
             word += i + " "
         word = word.strip()
         for i in planning[0]:
-            if (word == i[1]):
+            if (word.lower() == i[1].lower()):
                 chaineExist, chaineId = True, i[0]
                 break
             else:
