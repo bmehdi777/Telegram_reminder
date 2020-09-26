@@ -7,7 +7,7 @@ from bdd import database
 
 
 def main():
-    token = open("file/token","r").read()
+    token = open("file/token","r").read().rstrip()
     bot = telegram.Bot(token=token)
     send_rappel(bot)
 
