@@ -1,13 +1,15 @@
 import telegram
 import logging
 import datetime
+import os
 
 from modules import command
 from bdd import database
 
 
 def main():
-    token = open("file/token","r").read().rstrip()
+    actualDir = os.path.dirname(os.path.realpath(__file__))
+    token = open(actualDir+"/file/token","r").read().rstrip()
     bot = telegram.Bot(token=token)
     send_rappel(bot)
 
@@ -18,7 +20,6 @@ def send_rappel(bot):
     chats = database.get_chats_with_routine()
     if (len(routine) > 0):
         for k in chats:
-            print(k)
             resp = datetime.datetime.today().strftime('%d/%m/%Y') +"\nCe soir il y a : \n"
             for i in routine:
                 if(k[0] == i[2]):
