@@ -26,6 +26,8 @@ def send_rappel(bot):
                     for j in planning[1]:
                         if(i[1].lower() in j[0].lower()):
                             resp += " - " +j[0] + " sur la " + chaine[j[2]] + " à " + j[1] + "\n"
+            if(resp == datetime.datetime.today().strftime('%d/%m/%Y') +"\nCe soir il y a : \n")
+                resp = "Aucun programme en particulier ce soir.\n/prime pour voir le programme de la soirée."
             bot.send_message(chat_id=k[0], text=resp)
 
 
