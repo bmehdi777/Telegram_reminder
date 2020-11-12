@@ -18,17 +18,20 @@ def send_rappel(bot):
     chaine = dict(planning[0])
     routine = database.get_routines_enabled()
     chats = database.get_chats_with_routine()
+
+
     if (len(routine) > 0):
         for k in chats:
+            needSend = False
             resp = datetime.datetime.today().strftime('%d/%m/%Y') +"\nCe soir il y a : \n"
             for i in routine:
                 if(k[0] == i[2]):
                     for j in planning[1]:
                         if(i[1].lower() in j[0].lower()):
+                            needSend = True
                             resp += " - " +j[0] + " sur la " + chaine[j[2]] + " à " + j[1] + "\n"
-            if(resp == datetime.datetime.today().strftime('%d/%m/%Y') +"\nCe soir il y a : \n")
-                resp = "Aucun programme en particulier ce soir.\n/prime pour voir le programme de la soirée."
-            bot.send_message(chat_id=k[0], text=resp)
+            if (needSend):
+                bot.send_message(chat_id=k[0], text=resp)
 
 
 if __name__ == "__main__":
