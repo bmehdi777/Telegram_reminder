@@ -10,6 +10,11 @@ from bdd import database
 from cmd import getGuide
 
 #Function
+def split_list(alist, wanted_parts=1):
+    length = len(alist)
+    return [ alist[i*length // wanted_parts: (i+1)*length // wanted_parts] 
+             for i in range(wanted_parts) ]
+
 def read_f(path):
     f = open(path, 'r')
     return f.read()
@@ -27,7 +32,6 @@ def get_planning():
         # On ne prend qu'au dela de 20h
         if(start[0:8] == time.strftime('%Y%m%d') and int(start[8:12]) >= 2050):
             planning.append((j["title"], start[8:10]+"h"+start[10:12], j["@channel"]))
-
     return (chaine, planning)
 #Command
 
@@ -110,15 +114,22 @@ def cprime(bot, update, args):
     else:
         text_pl = "Le prime pour le {dt} est : \n\n".format(dt=datetime.datetime.now().strftime('%d/%m/%Y') )
         for i in planning[0]:
-            text_pl += "*{}* : \n".format(i[1])
-            elem = 0
+            text_pl += "\n*{}* : \n".format(i[1])
             for j in planning[1]:
                 #Si id de la chaine correspond a id de la chaine du programme
                 if(i[0] == j[2]):
-                    if (elem < 1):
-                        text_pl += j[0] + " - " + j[1]+"\n"
-                    elem += 1
-        bot.send_message(chat_id=update.message.chat_id, text=text_pl,  parse_mode=telegram.ParseMode.MARKDOWN)
+                    text_pl += j[0] + " - " + j[1]+"\n"
+        isOtherMsg = len(text_pl) > 4096 # Limite de telegram
+        if (isOtherMsg):
+            msgArr = split_list(text_pl.splitlines(), (len(text_pl) // 4096)+1)
+            for i in range(0, (len(text_pl) // 4096)+1):
+                newMsg = ""
+                for j in msgArr[i]:
+                    newMsg += j + "\n"
+                time.sleep(0.002)
+                bot.send_message(chat_id=update.message.chat_id, text=newMsg, parse_mode=telegram.ParseMode.MARKDOWN)
+        else:
+            bot.send_message(chat_id=update.message.chat_id, text=text_pl,  parse_mode=telegram.ParseMode.MARKDOWN)
 
 @send_typing_action
 def cgetchaine(bot, update):
